@@ -17,11 +17,10 @@ print(resultado)
 
 # 2. Dada una lista de números, obtén una nueva lista con el doble de cada valor. Usa la función map()
 
-def duplicar(lista_numeros):
-    return lista_numeros * 2
+def duplicar(x):
+    return x * 2
 
 lista_numeros = [1, 2, 3, 4, 5, 6]
-
 dobles = list(map(duplicar, lista_numeros))
 
 print(dobles)
@@ -76,15 +75,14 @@ print(type(resultado))
 
 # 6. Escribe una función que calcule el factorial de un número de manera recursiva.
 
-numero = 5
-
 def factorial(n):
-    if n == 0: # si n es 0, devuelve 1 (porque 0! = 1).
+    if n == 0:
         return 1
-    else:
-        print (f"El número ahora es {n}")
-        return n * factorial(n-1) # para calcular el factorial de n, primero quiere calcular el factorial de n-1. Luego lo multiplica por n. 
-factorial(numero)
+    return n * factorial(n-1)
+
+# Uso:
+numero = 5
+print(f"5! = {factorial(numero)}")
 
 # 7. Genera una función que convierta una lista de tuplas a una lista de strings. Usa la función map()
 
@@ -160,11 +158,11 @@ else: # este bloque solo se ejecuta si no ocurre ningún error.
 
 def edad_usuario():
     try:
-        edad = int(input("Introduce tu edad"))
+        edad = int(input("Introduce tu edad: "))
         if edad < 0 or edad > 120:
             raise ValueError("La edad debe estar entre 0 y 120.")
     except ValueError as error:
-        print("Error: no es un valor numérico.")
+        print(f"Error: {error}")
     else:
         print(f"Edad válida: {edad}.")
 
@@ -355,13 +353,13 @@ print(f"El resto de dividir {a} entre {b} es {resultado}.")
 
 # 27. Crea una función que calcule el promedio de una lista de números.
 
-def calcular_promedio(lista):
+def calcular_promedio_opcional(lista):
     if len(lista) == 0:
         return 0 # para evitar que se divida por 0.
     return sum(lista) / len(lista)
 
 lista_numeros = [10, 20, 30, 40, 50]
-promedio = calcular_promedio(lista_numeros)
+promedio = calcular_promedio_opcional(lista_numeros)
 
 print(f"El promedio es: {promedio}.")
 
@@ -398,13 +396,9 @@ print(enmascarar_variable(123456789))
 # 30. Crea una función que determine si dos palabras son anagramas, es decir, si están formadas por las mismas letras pero en diferente orden.
 
 def anagramas(palabra1, palabra2):
-    palabra1 = palabra1.replace("", "").lower() # eliminamos los espacios y convertimos todo a minúscula para tener un texto uniforme. 
+    palabra1 = palabra1.replace(" ", "").lower()
     palabra2 = palabra2.replace(" ", "").lower()
-    
-    letras1 = sorted(palabra1) # convertimos la cadena en una lista de letras ordenadas alfabéticamente para comparar si las dos palabras tienen exactamente las mismas letras. 
-    letras2 = sorted(palabra2)
-    
-    return letras1 == letras2 # Si las listas son idénticas, significa que las palabras son anagramas. 
+    return sorted(palabra1) == sorted(palabra2)
 
 print(anagramas("Roma", "Amor"))
 print(anagramas("Hola", "Hello"))
@@ -627,7 +621,7 @@ def procesar_texto(texto, opcion, *args): # tenemos una función principal que t
         return contar_palabras(texto)
     elif opcion == "reemplazar": # Si el usuario elige esta opción, se esperan dos argumentos adicionales (palabra_original, palabra_nueva). Si no se pasan exactamente 2, lanza un error con raise ValueError(...).
         if len(args) != 2:
-            raise ValueError("Se requiern dos argumentos: palabra_original y palabra_nueva")
+            raise ValueError("Se requieren dos argumentos: palabra_original y palabra_nueva")
         return reemplazar_palabras(texto, args[0], args[1]) # Si están bien, llama a reemplazar_palabras(texto, palabra_original, palabra_nueva) usando args[0] y args[1].
     elif opcion == "eliminar":
         if len(args) != 1: 
